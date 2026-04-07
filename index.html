@@ -744,6 +744,16 @@
   }
 
   /* ── ASCII DIAGRAM ── */
+  /* ── SVG DIAGRAMS ── */
+  .svg-diagram {
+    width: 100%;
+    margin: 1.25rem 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .svg-diagram svg { width: 100%; height: auto; display: block; }
+
+  /* tree / file-structure stays as monospace scroll box */
   .ascii-diagram {
     background: #1e1e2e;
     color: #a6e3a1;
@@ -754,7 +764,17 @@
     margin: 1rem 0;
     overflow-x: auto;
     line-height: 1.6;
+    white-space: pre;
   }
+
+  /* ── SVG DIAGRAMS ── */
+  .svg-diagram {
+    width: 100%;
+    margin: 1.25rem 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .svg-diagram svg { width: 100%; height: auto; display: block; }
 
   /* ── SEARCH BAR ── */
   .search-wrap {
@@ -1041,7 +1061,7 @@
     margin: 2.5rem 0;
   }
 
-  /* diagram box */
+  /* diagram box (file trees / anatomy) */
   .diagram-box {
     border: 1.5px solid var(--border);
     border-radius: var(--radius);
@@ -1063,7 +1083,7 @@
 <aside class="sidebar">
   <div class="sidebar-brand">
     <div class="logo">Frontend Technologies<br>Handbook</div>
-    <div class="sub">University Study Guide · 2024</div>
+
   </div>
 
   <!-- SEARCH BAR -->
@@ -1253,16 +1273,34 @@
       </div>
 
       <h3 class="sub-title">How a Web Page Works</h3>
-      <div class="ascii-diagram">
-Browser (Client)          Internet             Web Server
-┌────────────────┐         ─────          ┌──────────────────┐
-│  User types    │  ─── HTTP Request ──►  │  Server finds    │
-│  URL in bar    │                        │  the HTML file   │
-│                │  ◄── HTTP Response ─── │  and sends it    │
-│  Browser reads │                        └──────────────────┘
-│  HTML and      │
-│  displays page │
-└────────────────┘</div>
+      <div class="svg-diagram">
+<svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- Browser box -->
+  <rect x="10" y="30" width="190" height="140" rx="10" fill="#1a1a2e" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="105" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#4cc9f0">Browser (Client)</text>
+  <text x="105" y="75" text-anchor="middle" font-size="11" fill="#cdd6f4">User types URL</text>
+  <text x="105" y="95" text-anchor="middle" font-size="11" fill="#cdd6f4">in address bar</text>
+  <text x="105" y="130" text-anchor="middle" font-size="11" fill="#cdd6f4">Renders HTML</text>
+  <text x="105" y="148" text-anchor="middle" font-size="11" fill="#cdd6f4">into a webpage</text>
+  <!-- Web Server box -->
+  <rect x="560" y="30" width="190" height="140" rx="10" fill="#1a1a2e" stroke="#e94560" stroke-width="2"/>
+  <text x="655" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#e94560">Web Server</text>
+  <text x="655" y="90" text-anchor="middle" font-size="11" fill="#cdd6f4">Finds the HTML</text>
+  <text x="655" y="108" text-anchor="middle" font-size="11" fill="#cdd6f4">file and sends it</text>
+  <!-- Internet cloud label -->
+  <text x="380" y="52" text-anchor="middle" font-size="11" fill="#868e96">Internet</text>
+  <!-- HTTP Request arrow -->
+  <line x1="200" y1="85" x2="560" y2="85" stroke="#f5a623" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="380" y="78" text-anchor="middle" font-size="11" fill="#f5a623" font-weight="700">HTTP Request →</text>
+  <!-- HTTP Response arrow -->
+  <line x1="560" y1="120" x2="200" y2="120" stroke="#06d6a0" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="380" y="115" text-anchor="middle" font-size="11" fill="#06d6a0" font-weight="700">← HTTP Response</text>
+  <defs>
+    <marker id="arr"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5a623"/></marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M8,0 L8,6 L0,3 z" fill="#06d6a0"/></marker>
+  </defs>
+</svg>
+</div>
 
       <h3 id="html-features" class="sub-title">Key Features of HTML</h3>
       <ul class="fancy">
@@ -1316,13 +1354,30 @@ Browser (Client)          Internet             Web Server
       </div>
 
       <h3 class="sub-title">Anatomy of an HTML Element</h3>
-      <div class="diagram-box">
-Opening tag    Attribute   Value        Content     Closing tag
-    │               │        │               │            │
-    ▼               ▼        ▼               ▼            ▼
-&lt;a           href="https://google.com"&gt;  Click here  &lt;/a&gt;
-    └────────────────────────────────┘
-           Complete Element</div>
+  <div class="svg-diagram">
+<svg viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <text x="360" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#4cc9f0">Anatomy of an HTML Element</text>
+  <rect x="20" y="68" width="680" height="44" rx="8" fill="#1e1e2e" stroke="#2d3748" stroke-width="1.5"/>
+  <text x="40"  y="96" font-size="15" font-family="IBM Plex Mono,monospace" fill="#f38ba8">&lt;a</text>
+  <text x="80"  y="96" font-size="15" font-family="IBM Plex Mono,monospace" fill="#f9e2af">href=</text>
+  <text x="150" y="96" font-size="15" font-family="IBM Plex Mono,monospace" fill="#a6e3a1">"https://google.com"</text>
+  <text x="414" y="96" font-size="15" font-family="IBM Plex Mono,monospace" fill="#cdd6f4">&gt; Click here &lt;/a&gt;</text>
+  <!-- label lines up -->
+  <line x1="52"  y1="68" x2="52"  y2="50" stroke="#f38ba8" stroke-width="1.2"/>
+  <text x="52"  y="44" text-anchor="middle" font-size="9" fill="#f38ba8">Opening tag</text>
+  <line x1="118" y1="68" x2="118" y2="42" stroke="#f9e2af" stroke-width="1.2"/>
+  <text x="118" y="36" text-anchor="middle" font-size="9" fill="#f9e2af">Attribute</text>
+  <line x1="278" y1="68" x2="278" y2="50" stroke="#a6e3a1" stroke-width="1.2"/>
+  <text x="278" y="44" text-anchor="middle" font-size="9" fill="#a6e3a1">Value</text>
+  <line x1="476" y1="68" x2="476" y2="42" stroke="#cdd6f4" stroke-width="1.2"/>
+  <text x="476" y="36" text-anchor="middle" font-size="9" fill="#cdd6f4">Content</text>
+  <line x1="590" y1="68" x2="590" y2="50" stroke="#f38ba8" stroke-width="1.2"/>
+  <text x="628" y="44" text-anchor="middle" font-size="9" fill="#f38ba8">Closing tag</text>
+  <!-- bracket -->
+  <path d="M 40 112 L 40 124 L 680 124 L 680 112" fill="none" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="360" y="143" text-anchor="middle" font-size="10" fill="#4cc9f0" font-weight="700">Complete HTML Element</text>
+</svg>
+</div>
 
       <h3 class="sub-title">Categories of HTML Tags</h3>
 
@@ -1577,23 +1632,24 @@ Opening tag    Attribute   Value        Content     Closing tag
       <h3 id="css-box" class="sub-title">The CSS Box Model</h3>
       <p>Every HTML element is treated as a box. The box model defines how space is calculated.</p>
 
-      <div class="ascii-diagram">
-┌─────────────────────────────────────────┐
-│                 MARGIN                  │  ← Space outside the element
-│   ┌─────────────────────────────────┐   │
-│   │            BORDER               │   │  ← Border around the element
-│   │   ┌─────────────────────────┐   │   │
-│   │   │         PADDING         │   │   │  ← Space inside the border
-│   │   │   ┌─────────────────┐   │   │   │
-│   │   │   │                 │   │   │   │
-│   │   │   │     CONTENT     │   │   │   │  ← Actual text/image
-│   │   │   │  (width/height) │   │   │   │
-│   │   │   └─────────────────┘   │   │   │
-│   │   └─────────────────────────┘   │   │
-│   └─────────────────────────────────┘   │
-└─────────────────────────────────────────┘
-
-Total width = content + padding-left + padding-right + border-left + border-right + margin-left + margin-right</div>
+      <div class="svg-diagram">
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- MARGIN (outermost) -->
+  <rect x="10" y="10" width="620" height="300" rx="12" fill="#2a0a12" stroke="#e94560" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="320" y="35" text-anchor="middle" font-size="13" font-weight="800" fill="#e94560" letter-spacing="2">MARGIN</text>
+  <text x="580" y="140" text-anchor="middle" font-size="10" fill="#e94560">← Space outside</text>
+  <!-- BORDER -->
+  <rect x="55" y="50" width="530" height="220" rx="10" fill="#1a0a2e" stroke="#b97bff" stroke-width="2.5"/>
+  <text x="320" y="73" text-anchor="middle" font-size="13" font-weight="800" fill="#b97bff" letter-spacing="2">BORDER</text>
+  <!-- PADDING -->
+  <rect x="100" y="88" width="440" height="150" rx="8" fill="#0a2018" stroke="#06d6a0" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="320" y="110" text-anchor="middle" font-size="13" font-weight="800" fill="#06d6a0" letter-spacing="2">PADDING</text>
+  <!-- CONTENT -->
+  <rect x="155" y="125" width="330" height="80" rx="6" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="320" y="161" text-anchor="middle" font-size="14" font-weight="800" fill="#4cc9f0">CONTENT</text>
+  <text x="320" y="179" text-anchor="middle" font-size="11" fill="#94a3b8">width × height</text>
+</svg>
+</div>
 
       <pre><span class="code-lang">CSS</span><span class="fn">.box</span> {
   <span class="attr">width</span>: <span class="val">300px</span>;          <span class="cm">/* Content width */</span>
@@ -1947,28 +2003,41 @@ $.ajax({
     <div id="fullstack" class="topic">
       <h2 class="section-title">1.11 Full Stack Development Introduction</h2>
 
-      <div class="ascii-diagram">
-┌─────────────────────────────────────────────────────────┐
-│                   FULL STACK                            │
-│                                                         │
-│  ┌─────────────────────┐   ┌─────────────────────────┐ │
-│  │    FRONTEND         │   │      BACKEND            │ │
-│  │  (Client Side)      │   │    (Server Side)        │ │
-│  │                     │   │                         │ │
-│  │  HTML / CSS / JS    │   │  Node.js / Python /     │ │
-│  │  React / Bootstrap  │   │  PHP / Java / Ruby      │ │
-│  │  Vue / Angular      │   │  Express / Django       │ │
-│  │                     │   │                         │ │
-│  └─────────┬───────────┘   └──────────┬──────────────┘ │
-│            │     HTTP / REST API       │                │
-│            └──────────────────────────┘                │
-│                           │                            │
-│                  ┌────────▼──────────┐                 │
-│                  │     DATABASE      │                 │
-│                  │  MySQL / MongoDB  │                 │
-│                  │  PostgreSQL       │                 │
-│                  └───────────────────┘                 │
-└─────────────────────────────────────────────────────────┘</div>
+      <div class="svg-diagram">
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- outer -->
+  <rect x="8" y="8" width="704" height="304" rx="14" fill="#111827" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="360" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#4cc9f0" letter-spacing="3">FULL STACK</text>
+  <!-- FRONTEND -->
+  <rect x="30" y="50" width="270" height="160" rx="10" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="165" y="75" text-anchor="middle" font-size="13" font-weight="800" fill="#4cc9f0">FRONTEND</text>
+  <text x="165" y="93" text-anchor="middle" font-size="10" fill="#64748b">(Client Side)</text>
+  <text x="165" y="118" text-anchor="middle" font-size="11" fill="#94a3b8">HTML / CSS / JS</text>
+  <text x="165" y="136" text-anchor="middle" font-size="11" fill="#94a3b8">React / Bootstrap</text>
+  <text x="165" y="154" text-anchor="middle" font-size="11" fill="#94a3b8">Vue / Angular</text>
+  <!-- BACKEND -->
+  <rect x="420" y="50" width="270" height="160" rx="10" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="555" y="75" text-anchor="middle" font-size="13" font-weight="800" fill="#e94560">BACKEND</text>
+  <text x="555" y="93" text-anchor="middle" font-size="10" fill="#64748b">(Server Side)</text>
+  <text x="555" y="118" text-anchor="middle" font-size="11" fill="#94a3b8">Node.js / Python</text>
+  <text x="555" y="136" text-anchor="middle" font-size="11" fill="#94a3b8">PHP / Java / Ruby</text>
+  <text x="555" y="154" text-anchor="middle" font-size="11" fill="#94a3b8">Express / Django</text>
+  <!-- REST API arrow -->
+  <line x1="300" y1="130" x2="420" y2="130" stroke="#f5a623" stroke-width="2" marker-end="url(#a3r)" marker-start="url(#a3l)"/>
+  <text x="360" y="122" text-anchor="middle" font-size="10" fill="#f5a623" font-weight="700">HTTP / REST API</text>
+  <!-- Database -->
+  <rect x="240" y="250" width="240" height="55" rx="10" fill="#1a0a2e" stroke="#b97bff" stroke-width="2"/>
+  <text x="360" y="273" text-anchor="middle" font-size="13" font-weight="800" fill="#b97bff">DATABASE</text>
+  <text x="360" y="292" text-anchor="middle" font-size="11" fill="#94a3b8">MySQL · MongoDB · PostgreSQL</text>
+  <!-- Lines down to DB -->
+  <line x1="165" y1="210" x2="300" y2="250" stroke="#4cc9f0" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="555" y1="210" x2="420" y2="250" stroke="#e94560" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <defs>
+    <marker id="a3r" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#f5a623"/></marker>
+    <marker id="a3l" markerWidth="7" markerHeight="7" refX="1" refY="3" orient="auto-start-reverse"><path d="M0,0 L0,6 L7,3 z" fill="#f5a623"/></marker>
+  </defs>
+</svg>
+</div>
 
       <div class="tbl-wrap">
         <table>
@@ -2046,17 +2115,52 @@ git config --global user.email <span class="str">"<a href="/cdn-cgi/l/email-prot
 git config --list</pre>
 
       <h3 class="sub-title">Git Workflow Diagram</h3>
-      <div class="ascii-diagram">
-Working Directory     Staging Area        Local Repo        Remote Repo
-(Your Files)          (git add)           (git commit)      (GitHub)
-      │                   │                    │                 │
-      │── git add ────────►│                   │                 │
-      │                   │── git commit ─────►│                 │
-      │                   │                    │── git push ────►│
-      │◄──────────────────────────────────────────── git pull ──│
-      │                   │                    │                 │
-      │◄───────────────────────────── git checkout ─────────────│
-      │                   │◄──── git restore ──│                 │</div>
+      <div class="svg-diagram">
+<svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- 4 boxes -->
+  <!-- Working Dir -->
+  <rect x="10" y="50" width="160" height="80" rx="10" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="90" y="82" text-anchor="middle" font-size="12" font-weight="800" fill="#4cc9f0">Working Dir</text>
+  <text x="90" y="100" text-anchor="middle" font-size="10" fill="#64748b">Your Files</text>
+  <!-- Staging -->
+  <rect x="200" y="50" width="160" height="80" rx="10" fill="#2a1f00" stroke="#f5a623" stroke-width="2"/>
+  <text x="280" y="82" text-anchor="middle" font-size="12" font-weight="800" fill="#f5a623">Staging Area</text>
+  <text x="280" y="100" text-anchor="middle" font-size="10" fill="#64748b">git add</text>
+  <!-- Local Repo -->
+  <rect x="390" y="50" width="160" height="80" rx="10" fill="#0a2018" stroke="#06d6a0" stroke-width="2"/>
+  <text x="470" y="82" text-anchor="middle" font-size="12" font-weight="800" fill="#06d6a0">Local Repo</text>
+  <text x="470" y="100" text-anchor="middle" font-size="10" fill="#64748b">git commit</text>
+  <!-- Remote Repo -->
+  <rect x="580" y="50" width="160" height="80" rx="10" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="660" y="82" text-anchor="middle" font-size="12" font-weight="800" fill="#e94560">Remote Repo</text>
+  <text x="660" y="100" text-anchor="middle" font-size="10" fill="#64748b">GitHub</text>
+
+  <!-- Forward arrows (git add, commit, push) -->
+  <line x1="170" y1="78" x2="200" y2="78" stroke="#f5a623" stroke-width="2" marker-end="url(#fwd)"/>
+  <text x="185" y="70" text-anchor="middle" font-size="9" fill="#f5a623">git add</text>
+  <line x1="360" y1="78" x2="390" y2="78" stroke="#06d6a0" stroke-width="2" marker-end="url(#fwd2)"/>
+  <text x="375" y="70" text-anchor="middle" font-size="9" fill="#06d6a0">git commit</text>
+  <line x1="550" y1="78" x2="580" y2="78" stroke="#e94560" stroke-width="2" marker-end="url(#fwd3)"/>
+  <text x="565" y="70" text-anchor="middle" font-size="9" fill="#e94560">git push</text>
+
+  <!-- Reverse arrows (pull, checkout) -->
+  <line x1="580" y1="108" x2="10" y2="108" stroke="#b97bff" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#bk)"/>
+  <text x="300" y="125" text-anchor="middle" font-size="10" fill="#b97bff" font-weight="700">git pull / git clone</text>
+  <line x1="390" y1="140" x2="200" y2="155" stroke="#4cc9f0" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#bk2)"/>
+  <text x="295" y="165" text-anchor="middle" font-size="10" fill="#4cc9f0">git restore</text>
+
+  <!-- Legend -->
+  <text x="380" y="215" text-anchor="middle" font-size="11" fill="#64748b">Solid = forward flow  ·  Dashed = reverse / undo operations</text>
+
+  <defs>
+    <marker id="fwd"  markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#f5a623"/></marker>
+    <marker id="fwd2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#06d6a0"/></marker>
+    <marker id="fwd3" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e94560"/></marker>
+    <marker id="bk"   markerWidth="7" markerHeight="7" refX="1" refY="3" orient="auto"><path d="M7,0 L7,6 L0,3 z" fill="#b97bff"/></marker>
+    <marker id="bk2"  markerWidth="7" markerHeight="7" refX="1" refY="3" orient="auto"><path d="M7,0 L7,6 L0,3 z" fill="#4cc9f0"/></marker>
+  </defs>
+</svg>
+</div>
 
       <h3 class="sub-title">Essential Git Commands</h3>
       <pre><span class="code-lang">Bash</span><span class="cm"># === STARTING ===</span>
@@ -2107,22 +2211,61 @@ git reset HEAD~1                <span class="cm"># Undo last commit (keep change
       </ol>
 
       <h3 class="sub-title">Figma Interface Overview</h3>
-      <div class="ascii-diagram">
-┌─────────────────────────────────────────────────────────────┐
-│  [≡] Figma Logo  [File Edit View] [▶ Share] [▶ Present]    │  ← Toolbar
-├──────────────┬──────────────────────────────┬───────────────┤
-│              │                              │               │
-│  Left Panel  │        Canvas                │  Right Panel  │
-│  (Layers &   │   (where you design)         │  (Properties) │
-│   Assets)    │                              │               │
-│              │   ┌──────────────────────┐   │  Fill: ████   │
-│ ▼ Page 1     │   │    Frame/Artboard    │   │  Stroke: ─    │
-│   ▼ Frame    │   │  ┌────────────────┐  │   │  Corner: 8px  │
-│     Header   │   │  │   Text Layer   │  │   │  W: 375px     │
-│     Button   │   │  └────────────────┘  │   │  H: 812px     │
-│     Image    │   └──────────────────────┘   │  X: 0  Y: 0   │
-│              │                              │               │
-└──────────────┴──────────────────────────────┴───────────────┘</div>
+      <div class="svg-diagram">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- App chrome -->
+  <rect x="4" y="4" width="752" height="292" rx="12" fill="#1e1e2e" stroke="#533483" stroke-width="2"/>
+  <!-- Top toolbar bar -->
+  <rect x="4" y="4" width="752" height="38" rx="12" fill="#2a2a3e"/>
+  <rect x="4" y="30" width="752" height="12" fill="#2a2a3e"/>
+  <text x="26" y="26" font-size="16" fill="#b97bff">≡</text>
+  <text x="55" y="26" font-size="11" fill="#94a3b8">File</text>
+  <text x="90" y="26" font-size="11" fill="#94a3b8">Edit</text>
+  <text x="122" y="26" font-size="11" fill="#94a3b8">View</text>
+  <text x="580" y="26" font-size="11" fill="#06d6a0">▶ Present</text>
+  <text x="670" y="26" font-size="11" fill="#4cc9f0">Share</text>
+  <text x="370" y="26" text-anchor="middle" font-size="11" fill="#e94560" font-weight="700">▲ Figma Editor</text>
+  <!-- Left panel -->
+  <rect x="4" y="42" width="170" height="254" fill="#252535" rx="0"/>
+  <text x="89" y="64" text-anchor="middle" font-size="11" font-weight="700" fill="#b97bff">Layers &amp; Assets</text>
+  <line x1="14" y1="72" x2="164" y2="72" stroke="#333" stroke-width="1"/>
+  <text x="20" y="90"  font-size="10" fill="#64748b">▼ Page 1</text>
+  <text x="28" y="108" font-size="10" fill="#94a3b8">▼ Frame</text>
+  <text x="40" y="124" font-size="10" fill="#94a3b8">  Header</text>
+  <text x="40" y="140" font-size="10" fill="#06d6a0">● Button</text>
+  <text x="40" y="156" font-size="10" fill="#94a3b8">  Image</text>
+  <text x="40" y="172" font-size="10" fill="#94a3b8">  Text</text>
+  <!-- Right panel -->
+  <rect x="586" y="42" width="170" height="254" fill="#252535"/>
+  <text x="671" y="64" text-anchor="middle" font-size="11" font-weight="700" fill="#f5a623">Properties</text>
+  <line x1="596" y1="72" x2="746" y2="72" stroke="#333" stroke-width="1"/>
+  <text x="600" y="90"  font-size="10" fill="#64748b">Fill</text>
+  <rect x="700" y="80" width="36" height="14" rx="3" fill="#4cc9f0"/>
+  <text x="600" y="112" font-size="10" fill="#64748b">Stroke</text>
+  <text x="740" y="112" font-size="10" fill="#94a3b8">–</text>
+  <text x="600" y="134" font-size="10" fill="#64748b">Corner</text>
+  <text x="730" y="134" font-size="10" fill="#94a3b8">8px</text>
+  <text x="600" y="156" font-size="10" fill="#64748b">W</text>
+  <text x="626" y="156" font-size="10" fill="#94a3b8">375px</text>
+  <text x="680" y="156" font-size="10" fill="#64748b">H</text>
+  <text x="700" y="156" font-size="10" fill="#94a3b8">812px</text>
+  <text x="600" y="178" font-size="10" fill="#64748b">X: 0  Y: 0</text>
+  <!-- Canvas area -->
+  <rect x="174" y="42" width="412" height="254" fill="#181824"/>
+  <text x="380" y="66" text-anchor="middle" font-size="10" fill="#444">Canvas</text>
+  <!-- Artboard / Frame on canvas -->
+  <rect x="240" y="75" width="280" height="200" rx="6" fill="#fff" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="380" y="95" text-anchor="middle" font-size="10" fill="#333" font-weight="700">Frame / Artboard</text>
+  <rect x="255" y="105" width="250" height="22" rx="4" fill="#4cc9f0" opacity="0.2" stroke="#4cc9f0" stroke-width="1"/>
+  <text x="380" y="120" text-anchor="middle" font-size="10" fill="#4cc9f0">Header Component</text>
+  <rect x="255" y="138" width="118" height="60" rx="4" fill="#e94560" opacity="0.15" stroke="#e94560" stroke-width="1"/>
+  <text x="314" y="173" text-anchor="middle" font-size="10" fill="#e94560">Image</text>
+  <rect x="383" y="138" width="122" height="60" rx="4" fill="#06d6a0" opacity="0.15" stroke="#06d6a0" stroke-width="1"/>
+  <text x="444" y="173" text-anchor="middle" font-size="10" fill="#06d6a0">Text Block</text>
+  <rect x="310" y="212" width="140" height="28" rx="14" fill="#533483"/>
+  <text x="380" y="231" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Button</text>
+</svg>
+</div>
 
       <h3 class="sub-title">Figma Layers</h3>
       <p>Every element in Figma is a <strong>layer</strong>. Layers can be grouped, nested inside frames, and reordered. The Layers panel (left side) shows the layer hierarchy — similar to HTML's DOM tree.</p>
@@ -2352,12 +2495,12 @@ git reset HEAD~1                <span class="cm"># Undo last commit (keep change
   <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;title&gt;</span>Bootstrap 5 Page<span class="tag">&lt;/title&gt;</span>
   <span class="cm">&lt;!-- Bootstrap CSS --&gt;</span>
-  <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="val">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="val">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c3ceced5d2d5d3c0d1e1948f928f91">[email&#160;protected]</a>/dist/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span>
   <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="val">"text-center text-primary mt-4"</span><span class="tag">&gt;</span>Hello Bootstrap!<span class="tag">&lt;/h1&gt;</span>
   <span class="cm">&lt;!-- Bootstrap JS Bundle (includes Popper) --&gt;</span>
-  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c5e5353484f484e5d4c7c09120f120c">[email&#160;protected]</a>/dist/js/bootstrap.bundle.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
 <span class="tag">&lt;/body&gt;</span>
 <span class="tag">&lt;/html&gt;</span></pre>
 
@@ -2383,18 +2526,70 @@ import <span class="str">'bootstrap'</span>;</pre>
 <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1"</span><span class="tag">&gt;</span></pre>
 
       <h3 class="sub-title">Bootstrap Breakpoints</h3>
-      <div class="ascii-diagram">
-Breakpoint  Prefix  Min Width   Typical Device
-──────────────────────────────────────────────────
-xs          (none)  &lt; 576px    Portrait phones
-sm          sm      ≥ 576px    Landscape phones
-md          md      ≥ 768px    Tablets
-lg          lg      ≥ 992px    Laptops / Desktops
-xl          xl      ≥ 1200px   Large desktops
-xxl         xxl     ≥ 1400px   Extra large screens
+      <div class="svg-diagram">
+<svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#4cc9f0" letter-spacing="1">Bootstrap 5 Breakpoints</text>
+  <!-- Timeline bar -->
+  <rect x="30" y="50" width="700" height="32" rx="6" fill="#1e1e2e" stroke="#333" stroke-width="1"/>
+  <!-- xs -->
+  <rect x="30" y="50" width="88" height="32" rx="6" fill="#533483" opacity="0.85"/>
+  <text x="74" y="71" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">xs</text>
+  <!-- sm -->
+  <rect x="118" y="50" width="110" height="32" fill="#0f3460" opacity="0.9"/>
+  <text x="173" y="71" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">sm</text>
+  <!-- md -->
+  <rect x="228" y="50" width="126" height="32" fill="#1a5276" opacity="0.9"/>
+  <text x="291" y="71" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">md</text>
+  <!-- lg -->
+  <rect x="354" y="50" width="130" height="32" fill="#0a2018" opacity="0.9"/>
+  <text x="419" y="71" text-anchor="middle" font-size="11" fill="#06d6a0" font-weight="700">lg</text>
+  <!-- xl -->
+  <rect x="484" y="50" width="120" height="32" fill="#2a1f00" opacity="0.9"/>
+  <text x="544" y="71" text-anchor="middle" font-size="11" fill="#f5a623" font-weight="700">xl</text>
+  <!-- xxl -->
+  <rect x="604" y="50" width="126" height="32" rx="0 6 6 0" fill="#2a0a12" opacity="0.9"/>
+  <rect x="604" y="50" width="126" height="32" rx="0 6 6 0" fill="#2a0a12" opacity="0.1"/>
+  <text x="667" y="71" text-anchor="middle" font-size="11" fill="#e94560" font-weight="700">xxl</text>
 
-|─ xs ─|── sm ──|──── md ────|──── lg ────|──── xl ────|── xxl ──▶
-0      576px   768px       992px       1200px      1400px</div>
+  <!-- tick marks & labels below bar -->
+  <line x1="30"  y1="82" x2="30"  y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="118" y1="82" x2="118" y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="228" y1="82" x2="228" y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="354" y1="82" x2="354" y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="484" y1="82" x2="484" y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="604" y1="82" x2="604" y2="94" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="730" y1="82" x2="730" y2="94" stroke="#64748b" stroke-width="1.5"/>
+
+  <text x="30"  y="106" text-anchor="middle" font-size="9" fill="#64748b">0px</text>
+  <text x="118" y="106" text-anchor="middle" font-size="9" fill="#94a3b8">576px</text>
+  <text x="228" y="106" text-anchor="middle" font-size="9" fill="#94a3b8">768px</text>
+  <text x="354" y="106" text-anchor="middle" font-size="9" fill="#94a3b8">992px</text>
+  <text x="484" y="106" text-anchor="middle" font-size="9" fill="#94a3b8">1200px</text>
+  <text x="604" y="106" text-anchor="middle" font-size="9" fill="#94a3b8">1400px</text>
+  <text x="730" y="106" text-anchor="middle" font-size="9" fill="#64748b">∞</text>
+
+  <!-- Table below -->
+  <rect x="30" y="120" width="700" height="90" rx="8" fill="#1e1e2e" stroke="#2d3748" stroke-width="1"/>
+  <!-- Headers -->
+  <text x="85"  y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">Breakpoint</text>
+  <text x="210" y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">Prefix</text>
+  <text x="320" y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">Min Width</text>
+  <text x="510" y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">Typical Device</text>
+  <line x1="30" y1="145" x2="730" y2="145" stroke="#2d3748" stroke-width="1"/>
+
+  <!-- Row data -->
+  <text x="85" y="161" text-anchor="middle" font-size="10" fill="#b97bff">xs · sm · md</text>
+  <text x="210" y="161" text-anchor="middle" font-size="10" fill="#f1f5f9">(none) · sm · md</text>
+  <text x="320" y="161" text-anchor="middle" font-size="10" fill="#f1f5f9">&lt;576 · ≥576 · ≥768</text>
+  <text x="510" y="161" text-anchor="middle" font-size="10" fill="#f1f5f9">Phones · Landscape · Tablets</text>
+
+  <text x="85" y="181" text-anchor="middle" font-size="10" fill="#06d6a0">lg · xl · xxl</text>
+  <text x="210" y="181" text-anchor="middle" font-size="10" fill="#f1f5f9">lg · xl · xxl</text>
+  <text x="320" y="181" text-anchor="middle" font-size="10" fill="#f1f5f9">≥992 · ≥1200 · ≥1400</text>
+  <text x="510" y="181" text-anchor="middle" font-size="10" fill="#f1f5f9">Laptop · Desktop · Large</text>
+</svg>
+</div>
 
       <div class="callout exam">
         <div class="callout-title">⭐ Exam Focus</div>
@@ -2429,20 +2624,38 @@ xxl         xxl     ≥ 1400px   Extra large screens
       </div>
 
       <h3 class="sub-title">The 12-Column Grid System</h3>
-      <div class="ascii-diagram">
-Structure: .container → .row → .col-*
+      <div class="svg-diagram">
+<svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#4cc9f0">Bootstrap Grid Structure</text>
 
-.container
-└── .row  (flex container)
-    ├── .col-md-4   (33.3% = 4/12)
-    ├── .col-md-4   (33.3% = 4/12)
-    └── .col-md-4   (33.3% = 4/12)
-                     ──────────────── = 12 ✓
+  <!-- .container -->
+  <rect x="10" y="34" width="700" height="200" rx="10" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="65" y="54" font-size="11" fill="#4cc9f0" font-weight="700">.container</text>
 
-Column Widths Quick Reference:
-col-1=8.3%  col-2=16.7%  col-3=25%    col-4=33.3%
-col-5=41.7% col-6=50%    col-7=58.3%  col-8=66.7%
-col-9=75%   col-10=83.3% col-11=91.7% col-12=100%</div>
+  <!-- .row -->
+  <rect x="24" y="62" width="672" height="158" rx="8" fill="#0f3460" stroke="#4cc9f0" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="78" y="82" font-size="11" fill="#94a3b8" font-weight="700">.row</text>
+
+  <!-- col 1 -->
+  <rect x="38" y="90" width="204" height="118" rx="6" fill="#533483" stroke="#b97bff" stroke-width="1.5"/>
+  <text x="140" y="146" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">.col-md-4</text>
+  <text x="140" y="164" text-anchor="middle" font-size="10" fill="#b97bff">4/12 = 33.3%</text>
+
+  <!-- col 2 -->
+  <rect x="256" y="90" width="204" height="118" rx="6" fill="#533483" stroke="#b97bff" stroke-width="1.5"/>
+  <text x="358" y="146" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">.col-md-4</text>
+  <text x="358" y="164" text-anchor="middle" font-size="10" fill="#b97bff">4/12 = 33.3%</text>
+
+  <!-- col 3 -->
+  <rect x="474" y="90" width="208" height="118" rx="6" fill="#533483" stroke="#b97bff" stroke-width="1.5"/>
+  <text x="578" y="146" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">.col-md-4</text>
+  <text x="578" y="164" text-anchor="middle" font-size="10" fill="#b97bff">4/12 = 33.3%</text>
+
+  <!-- total label -->
+  <text x="360" y="226" text-anchor="middle" font-size="11" fill="#06d6a0" font-weight="700">4 + 4 + 4 = 12 columns = 100% width ✓</text>
+</svg>
+</div>
 
       <pre><span class="code-lang">HTML</span><span class="cm">&lt;!-- Equal-width auto columns --&gt;</span>
 <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"container"</span><span class="tag">&gt;</span>
@@ -2884,7 +3097,7 @@ col-9=75%   col-10=83.3% col-11=91.7% col-12=100%</div>
       <h3 class="sub-title">Bootstrap + jQuery (Compatibility)</h3>
       <pre><span class="code-lang">HTML</span><span class="cm">&lt;!-- Load jQuery BEFORE Bootstrap --&gt;</span>
 <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://code.jquery.com/jquery-3.7.0.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e1838e8e959295938091a1d4cfd2cfd1">[email&#160;protected]</a>/dist/js/bootstrap.bundle.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
 <span class="tag">&lt;script&gt;</span>
   <span class="cm">// jQuery + Bootstrap 5 together</span>
   $(<span class="str">'#openBtn'</span>).<span class="fn">on</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
@@ -3158,22 +3371,51 @@ col-9=75%   col-10=83.3% col-11=91.7% col-12=100%</div>
         </table>
       </div>
 
-      <div class="ascii-diagram">
-Frontend Framework Architecture:
+      <div class="svg-diagram">
+<svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <text x="360" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#4cc9f0">React — Virtual DOM Architecture</text>
 
-┌────────────────────────────────────────────┐
-│               Browser (DOM)                │
-│  ┌──────────────────────────────────────┐  │
-│  │           Virtual DOM (VDOM)         │  │
-│  │  (React keeps a copy in memory and   │  │
-│  │   only updates what actually changed)│  │
-│  └──────────────┬───────────────────────┘  │
-│                 │ Reconciliation (Diff)     │
-│  ┌──────────────▼───────────────────────┐  │
-│  │           Real DOM                   │  │
-│  │  (What the user actually sees)       │  │
-│  └──────────────────────────────────────┘  │
-└────────────────────────────────────────────┘</div>
+  <!-- State Change box -->
+  <rect x="20" y="40" width="160" height="70" rx="10" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="100" y="72" text-anchor="middle" font-size="12" font-weight="800" fill="#e94560">State Change</text>
+  <text x="100" y="90" text-anchor="middle" font-size="10" fill="#94a3b8">setState() called</text>
+
+  <!-- Virtual DOM -->
+  <rect x="270" y="40" width="180" height="70" rx="10" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="360" y="68" text-anchor="middle" font-size="12" font-weight="800" fill="#4cc9f0">Virtual DOM</text>
+  <text x="360" y="86" text-anchor="middle" font-size="10" fill="#94a3b8">JS copy in memory</text>
+
+  <!-- Diff / Reconcile -->
+  <rect x="270" y="145" width="180" height="70" rx="10" fill="#1a0a2e" stroke="#b97bff" stroke-width="2"/>
+  <text x="360" y="173" text-anchor="middle" font-size="12" font-weight="800" fill="#b97bff">Diffing</text>
+  <text x="360" y="191" text-anchor="middle" font-size="10" fill="#94a3b8">Old vs New VDOM</text>
+
+  <!-- Real DOM -->
+  <rect x="540" y="145" width="160" height="70" rx="10" fill="#0a2018" stroke="#06d6a0" stroke-width="2"/>
+  <text x="620" y="173" text-anchor="middle" font-size="12" font-weight="800" fill="#06d6a0">Real DOM</text>
+  <text x="620" y="191" text-anchor="middle" font-size="10" fill="#94a3b8">Only changed nodes</text>
+
+  <!-- arrows -->
+  <!-- state → VDOM -->
+  <line x1="180" y1="75" x2="270" y2="75" stroke="#e94560" stroke-width="2" marker-end="url(#v1)"/>
+  <text x="225" y="68" text-anchor="middle" font-size="9" fill="#e94560">re-render</text>
+  <!-- VDOM → Diff -->
+  <line x1="360" y1="110" x2="360" y2="145" stroke="#4cc9f0" stroke-width="2" marker-end="url(#v2)"/>
+  <text x="390" y="132" font-size="9" fill="#4cc9f0">compare</text>
+  <!-- Diff → Real DOM -->
+  <line x1="450" y1="180" x2="540" y2="180" stroke="#b97bff" stroke-width="2" marker-end="url(#v3)"/>
+  <text x="495" y="173" text-anchor="middle" font-size="9" fill="#b97bff">patch</text>
+
+  <!-- benefit label -->
+  <text x="360" y="238" text-anchor="middle" font-size="11" fill="#06d6a0" font-weight="700">Result: Only the changed parts of the page update → Fast! ⚡</text>
+
+  <defs>
+    <marker id="v1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e94560"/></marker>
+    <marker id="v2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4cc9f0"/></marker>
+    <marker id="v3" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#b97bff"/></marker>
+  </defs>
+</svg>
+</div>
     </div>
 
     <!-- ─── 3.2 REACT INTRODUCTION ─── -->
@@ -3466,40 +3708,107 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
       <h2 class="section-title">3.5 Flux Architecture &amp; Redux Introduction</h2>
 
       <h3 class="sub-title">The Problem: Prop Drilling</h3>
-      <div class="ascii-diagram">
-Without Redux — Prop Drilling problem:
-App (has data)
-  └── Parent
-        └── Child
-              └── GrandChild  ← needs the data!
-                              ← Must pass props through EVERY level
+      <div class="svg-diagram">
+<svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <!-- Left half: Prop Drilling -->
+  <text x="185" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#e94560">❌ Without Redux — Prop Drilling</text>
+  <!-- App -->
+  <rect x="130" y="34" width="110" height="36" rx="8" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="185" y="57" text-anchor="middle" font-size="11" fill="#e94560" font-weight="700">App (has data)</text>
+  <!-- Parent -->
+  <rect x="130" y="96" width="110" height="36" rx="8" fill="#1e1e2e" stroke="#64748b" stroke-width="1.5"/>
+  <text x="185" y="119" text-anchor="middle" font-size="11" fill="#94a3b8">Parent</text>
+  <!-- Child -->
+  <rect x="130" y="158" width="110" height="36" rx="8" fill="#1e1e2e" stroke="#64748b" stroke-width="1.5"/>
+  <text x="185" y="181" text-anchor="middle" font-size="11" fill="#94a3b8">Child</text>
+  <!-- GrandChild -->
+  <rect x="108" y="220" width="154" height="36" rx="8" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="185" y="237" text-anchor="middle" font-size="10" fill="#f1f5f9">GrandChild</text>
+  <text x="185" y="251" text-anchor="middle" font-size="9" fill="#e94560">← needs the data!</text>
+  <!-- prop arrows -->
+  <line x1="185" y1="70"  x2="185" y2="96"  stroke="#e94560" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#pd1)"/>
+  <line x1="185" y1="132" x2="185" y2="158" stroke="#e94560" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#pd1)"/>
+  <line x1="185" y1="194" x2="185" y2="220" stroke="#e94560" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#pd1)"/>
+  <text x="208" y="85"  font-size="9" fill="#64748b">pass props</text>
+  <text x="208" y="147" font-size="9" fill="#64748b">pass props</text>
+  <text x="208" y="209" font-size="9" fill="#64748b">pass props</text>
 
-With Redux — Global Store:
-         ┌─────────────────┐
-         │   Redux Store   │  ← Single source of truth
-         │   (Global State)│
-         └────────┬────────┘
-                  │ Any component can directly
-    ┌─────────────┼─────────────┐
-    │             │             │
-  App         Parent      GrandChild  ← All connect directly</div>
+  <!-- Divider -->
+  <line x1="368" y1="10" x2="368" y2="270" stroke="#2d3748" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- Right half: Redux Store -->
+  <text x="545" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#06d6a0">✅ With Redux — Global Store</text>
+  <!-- Store -->
+  <rect x="468" y="100" width="154" height="72" rx="10" fill="#0a2018" stroke="#06d6a0" stroke-width="2.5"/>
+  <text x="545" y="130" text-anchor="middle" font-size="12" fill="#06d6a0" font-weight="800">Redux Store</text>
+  <text x="545" y="148" text-anchor="middle" font-size="10" fill="#94a3b8">Global State</text>
+  <text x="545" y="162" text-anchor="middle" font-size="9" fill="#94a3b8">Single source of truth</text>
+  <!-- Components connecting directly -->
+  <rect x="390" y="34"  width="80" height="30" rx="6" fill="#1e1e2e" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="430" y="54" text-anchor="middle" font-size="10" fill="#4cc9f0">App</text>
+  <rect x="650" y="34"  width="80" height="30" rx="6" fill="#1e1e2e" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="690" y="54" text-anchor="middle" font-size="10" fill="#4cc9f0">GrandChild</text>
+  <rect x="390" y="230" width="80" height="30" rx="6" fill="#1e1e2e" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="430" y="250" text-anchor="middle" font-size="10" fill="#4cc9f0">Component B</text>
+  <rect x="650" y="230" width="80" height="30" rx="6" fill="#1e1e2e" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="690" y="250" text-anchor="middle" font-size="10" fill="#4cc9f0">Component C</text>
+  <!-- Store connections -->
+  <line x1="468" y1="125" x2="470" y2="64"  stroke="#06d6a0" stroke-width="1.5" marker-end="url(#pd2)"/>
+  <line x1="622" y1="125" x2="650" y2="64"  stroke="#06d6a0" stroke-width="1.5" marker-end="url(#pd2)"/>
+  <line x1="468" y1="155" x2="470" y2="245" stroke="#06d6a0" stroke-width="1.5" marker-end="url(#pd2)"/>
+  <line x1="622" y1="155" x2="650" y2="245" stroke="#06d6a0" stroke-width="1.5" marker-end="url(#pd2)"/>
+
+  <defs>
+    <marker id="pd1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e94560"/></marker>
+    <marker id="pd2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#06d6a0"/></marker>
+  </defs>
+</svg>
+</div>
 
       <h3 class="sub-title">Flux Architecture</h3>
       <p><strong>Flux</strong> is a design pattern (not a library) introduced by Facebook. Redux is the most popular implementation of Flux principles.</p>
 
-      <div class="ascii-diagram">
-Flux / Redux Unidirectional Data Flow:
+      <div class="svg-diagram">
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,sans-serif">
+  <text x="360" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#f5a623">Redux — Unidirectional Data Flow</text>
 
-  ┌──────────┐    dispatch    ┌──────────┐    updates   ┌──────────┐
-  │  Action  │ ─────────────► │  Store   │ ────────────► │   View   │
-  │(What     │               │(State +  │              │(React    │
-  │happened) │               │Reducers) │              │Component)│
-  └──────────┘               └──────────┘              └────┬─────┘
-       ▲                                                     │
-       └─────────────────── User Interaction ────────────────┘
-                                (e.g. click)
+  <!-- Action -->
+  <rect x="30" y="55" width="150" height="80" rx="10" fill="#2a0a12" stroke="#e94560" stroke-width="2"/>
+  <text x="105" y="88" text-anchor="middle" font-size="13" fill="#e94560" font-weight="800">Action</text>
+  <text x="105" y="106" text-anchor="middle" font-size="10" fill="#94a3b8">{ type, payload }</text>
+  <text x="105" y="122" text-anchor="middle" font-size="9" fill="#64748b">What happened</text>
 
-Key principle: Data flows in ONE direction only → predictable, debuggable</div>
+  <!-- Store / Reducer -->
+  <rect x="285" y="55" width="150" height="80" rx="10" fill="#0a2018" stroke="#06d6a0" stroke-width="2"/>
+  <text x="360" y="84" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="800">Store</text>
+  <text x="360" y="101" text-anchor="middle" font-size="10" fill="#94a3b8">State + Reducer</text>
+  <text x="360" y="117" text-anchor="middle" font-size="9" fill="#64748b">Pure function</text>
+
+  <!-- View -->
+  <rect x="540" y="55" width="150" height="80" rx="10" fill="#0c2340" stroke="#4cc9f0" stroke-width="2"/>
+  <text x="615" y="88" text-anchor="middle" font-size="13" fill="#4cc9f0" font-weight="800">View</text>
+  <text x="615" y="106" text-anchor="middle" font-size="10" fill="#94a3b8">React Component</text>
+  <text x="615" y="122" text-anchor="middle" font-size="9" fill="#64748b">UI re-renders</text>
+
+  <!-- dispatch arrow -->
+  <line x1="180" y1="90" x2="285" y2="90" stroke="#f5a623" stroke-width="2.5" marker-end="url(#rf1)"/>
+  <text x="232" y="82" text-anchor="middle" font-size="10" fill="#f5a623" font-weight="700">dispatch()</text>
+
+  <!-- updates arrow -->
+  <line x1="435" y1="90" x2="540" y2="90" stroke="#b97bff" stroke-width="2.5" marker-end="url(#rf2)"/>
+  <text x="487" y="82" text-anchor="middle" font-size="10" fill="#b97bff" font-weight="700">updates</text>
+
+  <!-- user interaction loop arrow (bottom) -->
+  <path d="M 615 135 Q 615 175 360 175 Q 105 175 105 135" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#rf3)"/>
+  <text x="360" y="190" text-anchor="middle" font-size="10" fill="#64748b">User interaction triggers new Action</text>
+
+  <defs>
+    <marker id="rf1" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5a623"/></marker>
+    <marker id="rf2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#b97bff"/></marker>
+    <marker id="rf3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker>
+  </defs>
+</svg>
+</div>
 
       <h3 class="sub-title">Redux Core Concepts</h3>
       <div class="tbl-wrap">
@@ -3740,7 +4049,7 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
 };
 
 <span class="cm">// Usage</span>
-<span class="fn">createUser</span>({ name: <span class="str">'Arjun'</span>, email: <span class="str">'arjun@example.com'</span> })
+<span class="fn">createUser</span>({ name: <span class="str">'Arjun'</span>, email: <span class="str">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e584978f908ba5809d8488958980cb868a88">[email&#160;protected]</a>'</span> })
   .<span class="fn">then</span>(user =&gt; console.<span class="fn">log</span>(<span class="str">'Created:'</span>, user))
   .<span class="fn">catch</span>(err =&gt; console.<span class="fn">error</span>(err));</pre>
 
@@ -4354,7 +4663,7 @@ VITE_IMG_BASE=https://image.tmdb.org/t/p/w500</pre>
 </div>
 
 </main>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══════════════════════════════════════════════
    FEATURE 1: DARK / LIGHT MODE
 ═══════════════════════════════════════════════ */
