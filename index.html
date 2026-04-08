@@ -1038,6 +1038,12 @@
   [data-theme="dark"] .def-desc { color: var(--text2); }
   [data-theme="dark"] code { background: #1a0a2e; color: #b97bff; }
   [data-theme="dark"] .toc-items li a { color: var(--text2); }
+  [data-theme="dark"] .rail-card { background: var(--surface); border-color: var(--border); }
+  [data-theme="dark"] .rail-card.rail-info { background: #0c2340; color: #90caf9; }
+  [data-theme="dark"] .rail-card.rail-tip  { background: #0a2018; color: #06d6a0; }
+  [data-theme="dark"] .rail-card.rail-warn { background: #2a0a12; color: #ff4d6d; }
+
+
   [data-theme="dark"] .toc h3 { color: var(--text); }
 
   /* ── PRINT ── */
@@ -1166,7 +1172,8 @@
     </div>
   </div>
 
-  <div class="content">
+  <div class="content-outer">
+    <div class="content-main">
 
     <!-- ══════════════════════════════════════ -->
     <!-- TABLE OF CONTENTS -->
@@ -4648,7 +4655,16 @@ VITE_IMG_BASE=https://image.tmdb.org/t/p/w500</pre>
       <div style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.4)">Print to PDF: Ctrl+P → Save as PDF → Enable Background Graphics</div>
     </div>
 
-  </div><!-- /.content -->
+    </div><!-- /.content-main -->
+
+    <!-- RIGHT RAIL -->
+    <aside class="content-rail">
+      <div class="rail-sticky" id="railSticky">
+        <!-- Rail cards injected by JS -->
+      </div>
+    </aside>
+
+  </div><!-- /.content-outer -->
 
 <!-- FLOATING TOOLBAR -->
 <div class="floating-toolbar">
@@ -4890,6 +4906,107 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('topicSearch').focus();
   }
 });
+
+
+/* ═══════════════════════════════════════════════
+   FEATURE 4: RIGHT RAIL — Definitions, Tips, Mistakes
+   Moves .callout.info/.tip/.warn into the sticky
+   right rail, replacing them in-place with a
+   placeholder so scroll anchors still work.
+═══════════════════════════════════════════════ */
+(function buildRail() {
+  const rail = document.getElementById('railSticky');
+  if (!rail) return;
+
+  // Only activate on wide enough screens
+  if (window.innerWidth <= 1200) return;
+
+  const typeMap = {
+    info: { cls: 'rail-info', icon: '📖', label: 'Definition'    },
+    tip:  { cls: 'rail-tip',  icon: '💡', label: 'Pro Tip'       },
+    warn: { cls: 'rail-warn', icon: '⚠️', label: 'Common Mistake' },
+  };
+
+  // Collect all eligible callouts (info, tip, warn) — NOT exam, NOT purple
+  const callouts = document.querySelectorAll(
+    '.callout.info, .callout.tip, .callout.warn'
+  );
+
+  callouts.forEach((box, i) => {
+    // Determine type
+    let type = 'info';
+    if (box.classList.contains('tip'))  type = 'tip';
+    if (box.classList.contains('warn')) type = 'warn';
+
+    const meta = typeMap[type];
+
+    // Give the original box an id if it doesn't have one
+    const anchorId = 'rail-anchor-' + i;
+    box.id = anchorId;
+
+    // Get the title from callout-title div
+    const titleEl = box.querySelector('.callout-title');
+    const titleText = titleEl ? titleEl.textContent.trim() : meta.label;
+
+    // Get the inner HTML (minus the title element)
+    let bodyHTML = box.innerHTML;
+    if (titleEl) {
+      bodyHTML = bodyHTML.replace(titleEl.outerHTML, '').trim();
+    }
+
+    // Build the rail card
+    const card = document.createElement('div');
+    card.className = 'rail-card ' + meta.cls;
+    card.dataset.anchor = anchorId;
+    card.innerHTML = \`<div class="rail-label">\${meta.icon} \${titleText}</div>\${bodyHTML}\`;
+
+    // Click on rail card → scroll to anchor
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const target = document.getElementById(anchorId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    rail.appendChild(card);
+
+    // Hide the original callout (keep it in DOM for anchor)
+    box.style.display = 'none';
+  });
+
+  // If rail is empty, hide the rail column
+  if (rail.children.length === 0) {
+    const railEl = document.querySelector('.content-rail');
+    if (railEl) railEl.style.display = 'none';
+  }
+
+  // ── Scroll-based highlight: highlight the rail card whose anchor is closest ──
+  const allCards = rail.querySelectorAll('.rail-card');
+
+  function highlightNearest() {
+    if (allCards.length === 0) return;
+    let best = null, bestDist = Infinity;
+
+    allCards.forEach(card => {
+      const anchor = document.getElementById(card.dataset.anchor);
+      if (!anchor) return;
+      // Find the nearest visible section heading above this anchor
+      const topic = anchor.closest('.topic');
+      const target = topic || anchor;
+      const rect = target.getBoundingClientRect();
+      const dist = Math.abs(rect.top - 120);
+      if (dist < bestDist) { bestDist = dist; best = card; }
+    });
+
+    allCards.forEach(c => c.style.outline = '');
+    if (best && bestDist < 400) {
+      best.style.outline = '2px solid currentColor';
+      best.style.outlineOffset = '2px';
+    }
+  }
+
+  window.addEventListener('scroll', highlightNearest, { passive: true });
+  highlightNearest();
+})();
 
 /* ═══════════════════════════════════════════════
    INIT ALL FEATURES
