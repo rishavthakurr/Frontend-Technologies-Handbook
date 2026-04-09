@@ -204,7 +204,7 @@
   /* ── CONTENT AREA ── */
   .content {
     padding: 3rem;
-    max-width: 900px;
+    max-width: 100%;
   }
 
   /* ── SECTION HEADERS ── */
@@ -1081,6 +1081,52 @@
     white-space: pre;
     line-height: 1.7;
   }
+
+  /* ── PER-TOPIC TWO-COLUMN GRID ── */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 0 1.75rem;
+    align-items: start;
+  }
+  .topic-body { min-width: 0; }
+  .topic-rail-inner {
+    position: sticky;
+    top: 1.5rem;
+    padding-top: 0.25rem;
+  }
+  .rail-card {
+    border-radius: var(--radius);
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.81rem;
+    line-height: 1.65;
+    border-left: 4px solid;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .rail-card:hover { transform: translateX(-2px); box-shadow: 2px 4px 12px rgba(0,0,0,0.1); }
+  .rail-card.rail-info { background: #e8f4fd; border-color: #2980b9; color: #1a5276; }
+  .rail-card.rail-tip  { background: #eafaf1; border-color: #27ae60; color: #1e8449; }
+  .rail-card.rail-warn { background: #fdedec; border-color: #e94560; color: #922b21; }
+  .rail-label {
+    font-size: 0.62rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+  .rail-card.rail-info .rail-label { color: #2980b9; }
+  .rail-card.rail-tip  .rail-label { color: #27ae60; }
+  .rail-card.rail-warn .rail-label { color: #e94560; }
+  [data-theme="dark"] .rail-card.rail-info { background:#0c2340; color:#90caf9; border-color:#4895ef; }
+  [data-theme="dark"] .rail-card.rail-info .rail-label { color:#4895ef; }
+  [data-theme="dark"] .rail-card.rail-tip  { background:#0a2018; color:#06d6a0; border-color:#06d6a0; }
+  [data-theme="dark"] .rail-card.rail-tip  .rail-label { color:#06d6a0; }
+  [data-theme="dark"] .rail-card.rail-warn { background:#2a0a12; color:#ff4d6d; border-color:#e94560; }
+  [data-theme="dark"] .rail-card.rail-warn .rail-label { color:#ff4d6d; }
+  @media (max-width: 1080px) {
+    .topic-grid { grid-template-columns: 1fr; }
+    .topic-rail-inner { display: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -1172,8 +1218,7 @@
     </div>
   </div>
 
-  <div class="content-outer">
-    <div class="content-main">
+  <div class="content">
 
     <!-- ══════════════════════════════════════ -->
     <!-- TABLE OF CONTENTS -->
@@ -1254,15 +1299,13 @@
     </div>
 
     <!-- ─────────────────────── HTML ─────────────────────── -->
-    <div id="html-intro" class="topic">
-      <h2 class="section-title">1.1 HTML — Introduction</h2>
+    <div id="html-intro" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.1 HTML — Introduction</h2>
 
       <p><strong>HTML</strong> stands for <strong>HyperText Markup Language</strong>. It is the standard language used to create and structure content on the web. Think of HTML as the <em>skeleton</em> of a webpage — it gives structure, but not style or behavior.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Definition</div>
-        <strong>HyperText</strong> means text that contains links to other texts (hyperlinks). <strong>Markup Language</strong> means it uses tags to "mark up" or annotate text with meaning and structure.
-      </div>
+      
 
       <h3 class="sub-title">History of HTML</h3>
       <div class="tbl-wrap">
@@ -1339,16 +1382,26 @@
     <span class="tag">&lt;p&gt;</span>This is my first webpage.<span class="tag">&lt;/p&gt;</span>
   <span class="tag">&lt;/body&gt;</span>
 <span class="tag">&lt;/html&gt;</span></pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip</div>
-        Always include <code>&lt;!DOCTYPE html&gt;</code> at the very first line. It tells the browser to use the latest HTML5 standards. Without it, browsers may switch to "quirks mode" which can cause unexpected layout issues.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Definition</div>
+  <strong>HyperText</strong> means text that contains links to other texts (hyperlinks). <strong>Markup Language</strong> means it uses tags to "mark up" or annotate text with meaning and structure.
+</div>
+<div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip</div>
+  Always include <code>&lt;!DOCTYPE html&gt;</code> at the very first line. It tells the browser to use the latest HTML5 standards. Without it, browsers may switch to "quirks mode" which can cause unexpected layout issues.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── HTML TAGS ─────────────────────── -->
-    <div id="html-tags" class="topic">
-      <h2 class="section-title">1.2 HTML Tags &amp; Elements</h2>
+    <div id="html-tags" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.2 HTML Tags &amp; Elements</h2>
 
       <p>HTML uses <strong>tags</strong> to mark up content. A tag is enclosed in angle brackets <code>&lt; &gt;</code>. Most elements have an <strong>opening tag</strong> and a <strong>closing tag</strong>.</p>
 
@@ -1512,10 +1565,7 @@
   <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span>
 <span class="tag">&lt;/form&gt;</span></pre>
 
-      <div class="callout warn">
-        <div class="callout-title">⚠️ Common Mistake</div>
-        Forgetting the <code>name</code> attribute on form inputs! Without <code>name</code>, the data will NOT be submitted to the server. Always include it.
-      </div>
+      
 
       <!-- HTML CHEAT SHEET -->
       <div id="cheatsheet-html">
@@ -1557,18 +1607,26 @@
           </div>
         </div>
       </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-warn">
+  <div class="rail-label">⚠️ ⚠️ Common Mistake</div>
+  Forgetting the <code>name</code> attribute on form inputs! Without <code>name</code>, the data will NOT be submitted to the server. Always include it.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── CSS ─────────────────────── -->
-    <div id="css" class="topic">
-      <h2 class="section-title">1.4 CSS — Types &amp; Properties</h2>
+    <div id="css" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.4 CSS — Types &amp; Properties</h2>
 
       <p><strong>CSS</strong> stands for <strong>Cascading Style Sheets</strong>. It controls how HTML elements look — their color, size, font, spacing, layout, and animation. If HTML is the skeleton, CSS is the skin and clothing.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Why "Cascading"?</div>
-        "Cascading" means styles flow down from parent to child elements, and when multiple rules conflict, there is a specific priority order (specificity) that determines which rule wins.
-      </div>
+      
 
       <h3 class="sub-title">Types of CSS</h3>
       <div class="tbl-wrap">
@@ -1733,18 +1791,26 @@
           </div>
         </div>
       </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Why "Cascading"?</div>
+  "Cascading" means styles flow down from parent to child elements, and when multiple rules conflict, there is a specific priority order (specificity) that determines which rule wins.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── JAVASCRIPT ─────────────────────── -->
-    <div id="js" class="topic">
-      <h2 class="section-title">1.6 JavaScript — Features &amp; Overview</h2>
+    <div id="js" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.6 JavaScript — Features &amp; Overview</h2>
 
       <p><strong>JavaScript (JS)</strong> is a lightweight, interpreted, object-oriented programming language primarily used to make web pages interactive. It runs directly in the browser — no server needed.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Definition</div>
-        JavaScript was created by Brendan Eich in 1995 in just 10 days at Netscape. It is now one of the most popular programming languages in the world and is essential for web development.
-      </div>
+      
 
       <h3 class="sub-title">Key Features of JavaScript</h3>
       <div class="card-grid">
@@ -1913,18 +1979,26 @@ box.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, (
   }
 }
 <span class="fn">requestAnimationFrame</span>(animate);</pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Definition</div>
+  JavaScript was created by Brendan Eich in 1995 in just 10 days at Netscape. It is now one of the most popular programming languages in the world and is essential for web development.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── JQUERY ─────────────────────── -->
-    <div id="jquery" class="topic">
-      <h2 class="section-title">1.10 jQuery Introduction</h2>
+    <div id="jquery" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.10 jQuery Introduction</h2>
 
       <p><strong>jQuery</strong> is a fast, small, and feature-rich JavaScript library. It makes HTML document traversal, manipulation, event handling, animation, and AJAX much simpler with an easy-to-use API that works across many browsers.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 jQuery's Motto</div>
-        "Write Less, Do More" — jQuery was created by John Resig in 2006 and became incredibly popular because it simplified JavaScript syntax dramatically.
-      </div>
+      
 
       <h3 class="sub-title">jQuery vs Vanilla JavaScript Comparison</h3>
       <div class="tbl-wrap">
@@ -2004,7 +2078,17 @@ $.ajax({
     console.<span class="fn">log</span>(<span class="str">"Error!"</span>, err);
   }
 });</pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 jQuery's Motto</div>
+  "Write Less, Do More" — jQuery was created by John Resig in 2006 and became incredibly popular because it simplified JavaScript syntax dramatically.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── FULL STACK ─────────────────────── -->
     <div id="fullstack" class="topic">
@@ -2098,15 +2182,13 @@ $.ajax({
     </div>
 
     <!-- ─────────────────────── GIT ─────────────────────── -->
-    <div id="git" class="topic">
-      <h2 class="section-title">1.12 Git Setup</h2>
+    <div id="git" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.12 Git Setup</h2>
 
       <p><strong>Git</strong> is a distributed <strong>version control system</strong> that tracks changes in files and enables collaboration. Created by Linus Torvalds in 2005.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Key Concept</div>
-        Git lets you take "snapshots" (commits) of your project at any point in time. You can go back to any snapshot, work on separate features in branches, and merge work from multiple developers.
-      </div>
+      
 
       <h3 class="sub-title">Git Installation &amp; First-Time Setup</h3>
       <pre><span class="code-lang">Bash</span><span class="cm"># Download Git from https://git-scm.com</span>
@@ -2196,16 +2278,26 @@ git branch -d feature-login     <span class="cm"># Delete branch</span>
 git log --oneline               <span class="cm"># Compact commit history</span>
 git diff                        <span class="cm"># See unstaged changes</span>
 git reset HEAD~1                <span class="cm"># Undo last commit (keep changes)</span></pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip — .gitignore</div>
-        Create a <code>.gitignore</code> file in your project root to tell Git which files to ignore. Common ignores: <code>node_modules/</code>, <code>.env</code>, <code>*.log</code>, <code>.DS_Store</code>
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Key Concept</div>
+  Git lets you take "snapshots" (commits) of your project at any point in time. You can go back to any snapshot, work on separate features in branches, and merge work from multiple developers.
+</div>
+<div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip — .gitignore</div>
+  Create a <code>.gitignore</code> file in your project root to tell Git which files to ignore. Common ignores: <code>node_modules/</code>, <code>.env</code>, <code>*.log</code>, <code>.DS_Store</code>
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─────────────────────── FIGMA ─────────────────────── -->
-    <div id="figma" class="topic">
-      <h2 class="section-title">1.13 Figma Tool</h2>
+    <div id="figma" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">1.13 Figma Tool</h2>
 
       <p><strong>Figma</strong> is a cloud-based, collaborative UI/UX design tool used to create wireframes, mockups, prototypes, and design systems. It runs entirely in the browser — no installation needed (though a desktop app is available).</p>
 
@@ -2330,12 +2422,17 @@ git reset HEAD~1                <span class="cm"># Undo last commit (keep change
         <li>Choose animation: Instant, Dissolve, Smart Animate, Slide</li>
         <li>Click <strong>Present</strong> (▶) to preview the prototype</li>
       </ol>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip — Figma Shortcuts</div>
-        <strong>F</strong> = Frame tool &nbsp;|&nbsp; <strong>R</strong> = Rectangle &nbsp;|&nbsp; <strong>T</strong> = Text &nbsp;|&nbsp; <strong>V</strong> = Move tool &nbsp;|&nbsp; <strong>Ctrl+D</strong> = Duplicate &nbsp;|&nbsp; <strong>Ctrl+G</strong> = Group &nbsp;|&nbsp; <strong>Ctrl+Alt+K</strong> = Create Component
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip — Figma Shortcuts</div>
+  <strong>F</strong> = Frame tool &nbsp;|&nbsp; <strong>R</strong> = Rectangle &nbsp;|&nbsp; <strong>T</strong> = Text &nbsp;|&nbsp; <strong>V</strong> = Move tool &nbsp;|&nbsp; <strong>Ctrl+D</strong> = Duplicate &nbsp;|&nbsp; <strong>Ctrl+G</strong> = Group &nbsp;|&nbsp; <strong>Ctrl+Alt+K</strong> = Create Component
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ══════ UNIT 1 SUMMARY ══════ -->
     <div id="unit1-summary" class="summary">
@@ -2461,14 +2558,12 @@ git reset HEAD~1                <span class="cm"># Undo last commit (keep change
     </div>
 
     <!-- ─── 2.1 BOOTSTRAP INTRODUCTION ─── -->
-    <div id="bs-intro" class="topic">
-      <h2 class="section-title">2.1 Bootstrap — Introduction</h2>
+    <div id="bs-intro" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.1 Bootstrap — Introduction</h2>
       <p><strong>Bootstrap</strong> is the world's most popular open-source CSS framework for building responsive, mobile-first websites. It provides a ready-made collection of CSS classes and JavaScript components so you don't have to write everything from scratch.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Definition</div>
-        Bootstrap was created by Twitter engineers Mark Otto and Jacob Thornton in 2011. The current version is <strong>Bootstrap 5</strong> (2021), which dropped the jQuery dependency and introduced many new utility classes.
-      </div>
+      
 
       <h3 class="sub-title">Why Use Bootstrap?</h3>
       <div class="card-grid">
@@ -2516,17 +2611,25 @@ git reset HEAD~1                <span class="cm"># Undo last commit (keep change
 <span class="cm"># Then in your main JS/entry file:</span>
 import <span class="str">'bootstrap/dist/css/bootstrap.min.css'</span>;
 import <span class="str">'bootstrap'</span>;</pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Definition</div>
+  Bootstrap was created by Twitter engineers Mark Otto and Jacob Thornton in 2011. The current version is <strong>Bootstrap 5</strong> (2021), which dropped the jQuery dependency and introduced many new utility classes.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 2.2 RESPONSIVE DESIGN & BREAKPOINTS ─── -->
-    <div id="bs-responsive" class="topic">
-      <h2 class="section-title">2.2 Responsive Design &amp; Breakpoints</h2>
+    <div id="bs-responsive" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.2 Responsive Design &amp; Breakpoints</h2>
       <p><strong>Responsive Design</strong> means creating web pages that look good on all devices — from small mobile phones to large desktop monitors — by adapting the layout based on screen size.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Mobile-First Approach</div>
-        Bootstrap uses a <strong>mobile-first</strong> strategy: design for the smallest screen first, then add styles for larger screens. The base CSS applies to mobile, and breakpoint classes add styles as screens grow.
-      </div>
+      
 
       <h4 class="mini-title">The Viewport Meta Tag (Essential!)</h4>
       <pre><span class="code-lang">HTML</span><span class="cm">&lt;!-- Always include this in &lt;head&gt; --&gt;</span>
@@ -2612,7 +2715,17 @@ import <span class="str">'bootstrap'</span>;</pre>
 
 <span class="cm">&lt;!-- Text alignment responsive --&gt;</span>
 <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"text-center text-md-start"</span><span class="tag">&gt;</span>Centered on mobile, left on tablet+<span class="tag">&lt;/p&gt;</span></pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Mobile-First Approach</div>
+  Bootstrap uses a <strong>mobile-first</strong> strategy: design for the smallest screen first, then add styles for larger screens. The base CSS applies to mobile, and breakpoint classes add styles as screens grow.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 2.3 CONTAINERS, GRID, COLUMNS ─── -->
     <div id="bs-grid" class="topic">
@@ -2720,8 +2833,9 @@ import <span class="str">'bootstrap'</span>;</pre>
     </div>
 
     <!-- ─── 2.4 UTILITIES & Z-INDEX ─── -->
-    <div id="bs-utilities" class="topic">
-      <h2 class="section-title">2.4 Utilities, Z-index &amp; Flexbox Helpers</h2>
+    <div id="bs-utilities" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.4 Utilities, Z-index &amp; Flexbox Helpers</h2>
 
       <h3 class="sub-title">Spacing Utilities (Margin &amp; Padding)</h3>
       <p>Pattern: <code>{property}{sides}-{breakpoint}-{size}</code></p>
@@ -2772,16 +2886,22 @@ import <span class="str">'bootstrap'</span>;</pre>
           </tbody>
         </table>
       </div>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip</div>
-        If your modal isn't showing on top of other elements, it's usually a z-index conflict with a parent that has <code>position: relative</code> and a z-index creating a new stacking context. Keep modals as direct children of <code>&lt;body&gt;</code>.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip</div>
+  If your modal isn't showing on top of other elements, it's usually a z-index conflict with a parent that has <code>position: relative</code> and a z-index creating a new stacking context. Keep modals as direct children of <code>&lt;body&gt;</code>.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 2.5 REBOOT, TYPOGRAPHY, IMAGES, TABLES ─── -->
-    <div id="bs-typography" class="topic">
-      <h2 class="section-title">2.5 Reboot, Typography, Images &amp; Tables</h2>
+    <div id="bs-typography" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.5 Reboot, Typography, Images &amp; Tables</h2>
 
       <h3 class="sub-title">Reboot</h3>
       <p>Bootstrap's <strong>Reboot</strong> normalizes CSS across browsers. It sets <code>box-sizing: border-box</code> on everything, removes default margins, and makes images responsive by default (<code>max-width: 100%</code>).</p>
@@ -2828,12 +2948,17 @@ import <span class="str">'bootstrap'</span>;</pre>
     <span class="tag">&lt;/tbody&gt;</span>
   <span class="tag">&lt;/table&gt;</span>
 <span class="tag">&lt;/div&gt;</span></pre>
-
-      <div class="callout info">
-        <div class="callout-title">📋 Table Modifier Classes</div>
-        <code>table-striped</code> alternating rows · <code>table-hover</code> highlight on hover · <code>table-bordered</code> borders everywhere · <code>table-borderless</code> no borders · <code>table-sm</code> compact · <code>table-dark</code> dark theme · <code>table-responsive</code> horizontal scroll wrapper
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📋 Table Modifier Classes</div>
+  <code>table-striped</code> alternating rows · <code>table-hover</code> highlight on hover · <code>table-bordered</code> borders everywhere · <code>table-borderless</code> no borders · <code>table-sm</code> compact · <code>table-dark</code> dark theme · <code>table-responsive</code> horizontal scroll wrapper
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 2.6 FORMS & VALIDATION ─── -->
     <div id="bs-forms" class="topic">
@@ -2967,8 +3092,9 @@ import <span class="str">'bootstrap'</span>;</pre>
     </div>
 
     <!-- ─── 2.8 TABS, PILLS, COLLAPSE, ACCORDION ─── -->
-    <div id="bs-tabs" class="topic">
-      <h2 class="section-title">2.8 Tabs, Pills, Collapse &amp; Accordion</h2>
+    <div id="bs-tabs" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.8 Tabs, Pills, Collapse &amp; Accordion</h2>
 
       <h3 class="sub-title">Tabs</h3>
       <pre><span class="code-lang">HTML</span><span class="tag">&lt;ul</span> <span class="attr">class</span>=<span class="val">"nav nav-tabs"</span><span class="tag">&gt;</span>
@@ -3016,12 +3142,17 @@ import <span class="str">'bootstrap'</span>;</pre>
     <span class="tag">&lt;/div&gt;</span>
   <span class="tag">&lt;/div&gt;</span>
 <span class="tag">&lt;/div&gt;</span></pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Accordion Key Point</div>
-        The <code>data-bs-parent="#faq"</code> attribute on each collapse element is what makes accordion behavior work — it closes other items when a new one opens. Without it, you just have independent collapse elements.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Accordion Key Point</div>
+  The <code>data-bs-parent="#faq"</code> attribute on each collapse element is what makes accordion behavior work — it closes other items when a new one opens. Without it, you just have independent collapse elements.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 2.9 TOOLTIPS, POPOVERS, MODALS ─── -->
     <div id="bs-modals" class="topic">
@@ -3098,8 +3229,9 @@ import <span class="str">'bootstrap'</span>;</pre>
     </div>
 
     <!-- ─── 2.10 BOOTSTRAP + JQUERY + SASS ─── -->
-    <div id="bs-sass" class="topic">
-      <h2 class="section-title">2.10 Bootstrap + jQuery + Sass</h2>
+    <div id="bs-sass" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">2.10 Bootstrap + jQuery + Sass</h2>
 
       <h3 class="sub-title">Bootstrap + jQuery (Compatibility)</h3>
       <pre><span class="code-lang">HTML</span><span class="cm">&lt;!-- Load jQuery BEFORE Bootstrap --&gt;</span>
@@ -3175,12 +3307,17 @@ import <span class="str">'bootstrap'</span>;</pre>
 <span class="fn">$primary</span>: #e94560;     <span class="cm">// Override Bootstrap's primary color</span>
 <span class="fn">$font-size-base</span>: 1rem;
 <span class="kw">@import</span> <span class="str">"bootstrap/scss/bootstrap"</span>; <span class="cm">// AFTER overrides</span></pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip — Compiling Sass</div>
-        Install Sass: <code>npm install -g sass</code> → Compile: <code>sass custom.scss custom.css</code> → Watch mode: <code>sass --watch custom.scss:custom.css</code>. In VS Code, use the <strong>Live Sass Compiler</strong> extension to auto-compile on save.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip — Compiling Sass</div>
+  Install Sass: <code>npm install -g sass</code> → Compile: <code>sass custom.scss custom.css</code> → Watch mode: <code>sass --watch custom.scss:custom.css</code>. In VS Code, use the <strong>Live Sass Compiler</strong> extension to auto-compile on save.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- BOOTSTRAP CHEAT SHEET -->
     <div id="cheatsheet-bs">
@@ -3351,15 +3488,13 @@ import <span class="str">'bootstrap'</span>;</pre>
     </div>
 
     <!-- ─── 3.1 FRONTEND FRAMEWORKS OVERVIEW ─── -->
-    <div id="react-frameworks" class="topic">
-      <h2 class="section-title">3.1 Frontend Frameworks Overview</h2>
+    <div id="react-frameworks" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.1 Frontend Frameworks Overview</h2>
 
       <p>A <strong>frontend framework</strong> is a pre-built collection of tools, patterns, and conventions that helps developers build web user interfaces faster and more consistently. Instead of writing everything from scratch, frameworks give you reusable components, state management, routing, and more.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Why Use a Framework?</div>
-        As applications grow, plain HTML/CSS/JS becomes hard to manage. Frameworks introduce <strong>component-based architecture</strong>, <strong>reactive data binding</strong>, and <strong>virtual DOM</strong> — making large apps maintainable and performant.
-      </div>
+      
 
       <h3 class="sub-title">The Big Three Frontend Frameworks</h3>
       <div class="tbl-wrap">
@@ -3423,7 +3558,17 @@ import <span class="str">'bootstrap'</span>;</pre>
   </defs>
 </svg>
 </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Why Use a Framework?</div>
+  As applications grow, plain HTML/CSS/JS becomes hard to manage. Frameworks introduce <strong>component-based architecture</strong>, <strong>reactive data binding</strong>, and <strong>virtual DOM</strong> — making large apps maintainable and performant.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.2 REACT INTRODUCTION ─── -->
     <div id="react-intro" class="topic">
@@ -3484,8 +3629,9 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     </div>
 
     <!-- ─── 3.3 REACT COMPONENTS & JSX ─── -->
-    <div id="react-components" class="topic">
-      <h2 class="section-title">3.3 React Components &amp; JSX</h2>
+    <div id="react-components" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.3 React Components &amp; JSX</h2>
 
       <h3 class="sub-title">JSX — JavaScript XML</h3>
       <p>JSX lets you write HTML-like syntax directly inside JavaScript. The browser cannot read JSX — it is compiled (by Babel/Vite) to regular <code>React.createElement()</code> calls.</p>
@@ -3496,16 +3642,7 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
 <span class="cm">// Compiled to (what the browser actually runs):</span>
 <span class="kw">const</span> element = React.<span class="fn">createElement</span>(<span class="str">'h1'</span>, { className: <span class="str">'title'</span> }, <span class="str">'Hello, World!'</span>);</pre>
 
-      <div class="callout warn">
-        <div class="callout-title">⚠️ JSX Rules — Common Mistakes</div>
-        <ul class="fancy" style="margin:0">
-          <li>Use <code>className</code> instead of <code>class</code> (class is a reserved JS word)</li>
-          <li>Use <code>htmlFor</code> instead of <code>for</code> on labels</li>
-          <li>All tags must be closed — even self-closing: <code>&lt;img /&gt;</code> not <code>&lt;img&gt;</code></li>
-          <li>Return only ONE root element (use <code>&lt;&gt;&lt;/&gt;</code> Fragment if needed)</li>
-          <li>JavaScript expressions go inside <code>{curly braces}</code></li>
-        </ul>
-      </div>
+      
 
       <h3 class="sub-title">Functional Components</h3>
       <pre><span class="code-lang">JSX</span><span class="cm">// Simple functional component</span>
@@ -3643,7 +3780,23 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     &lt;/div&gt;
   );
 }</pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-warn">
+  <div class="rail-label">⚠️ ⚠️ JSX Rules — Common Mistakes</div>
+  <ul class="fancy" style="margin:0">
+          <li>Use <code>className</code> instead of <code>class</code> (class is a reserved JS word)</li>
+          <li>Use <code>htmlFor</code> instead of <code>for</code> on labels</li>
+          <li>All tags must be closed — even self-closing: <code>&lt;img /&gt;</code> not <code>&lt;img&gt;</code></li>
+          <li>Return only ONE root element (use <code>&lt;&gt;&lt;/&gt;</code> Fragment if needed)</li>
+          <li>JavaScript expressions go inside <code>{curly braces}</code></li>
+        </ul>
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.4 REACT FORMS ─── -->
     <div id="react-forms" class="topic">
@@ -3862,8 +4015,9 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     </div>
 
     <!-- ─── 3.6 REDUX ACTIONS & REDUCERS ─── -->
-    <div id="redux-reducers" class="topic">
-      <h2 class="section-title">3.6 Redux Actions &amp; Reducers</h2>
+    <div id="redux-reducers" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.6 Redux Actions &amp; Reducers</h2>
 
       <pre><span class="code-lang">JavaScript</span><span class="cm">// store/store.js — Configure the Redux store</span>
 <span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="str">'@reduxjs/toolkit'</span>;
@@ -3910,23 +4064,26 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     &lt;/div&gt;
   );
 }</pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Rules for Reducers</div>
-        Reducers MUST be pure functions: (1) Same input always gives same output, (2) No side effects (no API calls, no random numbers), (3) Never mutate the original state — return a new object. Redux Toolkit uses Immer internally so you can write "mutating" code that is actually safe.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Rules for Reducers</div>
+  Reducers MUST be pure functions: (1) Same input always gives same output, (2) No side effects (no API calls, no random numbers), (3) Never mutate the original state — return a new object. Redux Toolkit uses Immer internally so you can write "mutating" code that is actually safe.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.7 REDUX THUNK & FETCH API ─── -->
-    <div id="redux-thunk" class="topic">
-      <h2 class="section-title">3.7 Redux Thunk &amp; Fetch API</h2>
+    <div id="redux-thunk" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.7 Redux Thunk &amp; Fetch API</h2>
 
       <p><strong>Redux Thunk</strong> is middleware that allows action creators to return <em>functions</em> instead of plain action objects. This enables <strong>asynchronous logic</strong> (like API calls) inside Redux.</p>
 
-      <div class="callout info">
-        <div class="callout-title">📖 Why Thunk?</div>
-        Redux reducers are synchronous and pure. But fetching data from an API is asynchronous. Thunk lets you write async action creators — they can make API calls and dispatch actions when the data arrives. Redux Toolkit includes thunk by default.
-      </div>
+      
 
       <pre><span class="code-lang">JavaScript</span><span class="cm">// store/postsSlice.js — Async thunk with createAsyncThunk</span>
 <span class="kw">import</span> { createSlice, createAsyncThunk } <span class="kw">from</span> <span class="str">'@reduxjs/toolkit'</span>;
@@ -3993,11 +4150,22 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     &lt;/ul&gt;
   );
 }</pre>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-info">
+  <div class="rail-label">📖 📖 Why Thunk?</div>
+  Redux reducers are synchronous and pure. But fetching data from an API is asynchronous. Thunk lets you write async action creators — they can make API calls and dispatch actions when the data arrives. Redux Toolkit includes thunk by default.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.8 FETCH API & REST API ─── -->
-    <div id="rest-api" class="topic">
-      <h2 class="section-title">3.8 Fetch API &amp; REST API</h2>
+    <div id="rest-api" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.8 Fetch API &amp; REST API</h2>
 
       <h3 class="sub-title">What is a REST API?</h3>
       <p><strong>REST</strong> (Representational State Transfer) is an architectural style for APIs. A REST API lets your frontend communicate with a backend server using standard HTTP methods.</p>
@@ -4059,12 +4227,17 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
 <span class="fn">createUser</span>({ name: <span class="str">'Arjun'</span>, email: <span class="str">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e584978f908ba5809d8488958980cb868a88">[email&#160;protected]</a>'</span> })
   .<span class="fn">then</span>(user =&gt; console.<span class="fn">log</span>(<span class="str">'Created:'</span>, user))
   .<span class="fn">catch</span>(err =&gt; console.<span class="fn">error</span>(err));</pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Pro Tip — Use Axios for simpler API calls</div>
-        <code>npm install axios</code> — Axios automatically parses JSON, handles errors better, and has cleaner syntax than fetch. For simple projects fetch is fine; for production apps, Axios is preferred.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Pro Tip — Use Axios for simpler API calls</div>
+  <code>npm install axios</code> — Axios automatically parses JSON, handles errors better, and has cleaner syntax than fetch. For simple projects fetch is fine; for production apps, Axios is preferred.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.9 REACT ANIMATION ─── -->
     <div id="react-animation" class="topic">
@@ -4144,8 +4317,9 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     </div>
 
     <!-- ─── 3.10 TESTING REACT APPS ─── -->
-    <div id="react-testing" class="topic">
-      <h2 class="section-title">3.10 Testing React Apps</h2>
+    <div id="react-testing" class="topic topic-grid">
+  <div class="topic-body">
+    <h2 class="section-title">3.10 Testing React Apps</h2>
 
       <h3 class="sub-title">Types of Tests</h3>
       <div class="tbl-wrap">
@@ -4200,12 +4374,17 @@ ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElement
     expect(screen.<span class="fn">getByText</span>(<span class="str">'Count: 1'</span>)).<span class="fn">toBeInTheDocument</span>();
   });
 });</pre>
-
-      <div class="callout tip">
-        <div class="callout-title">💡 Testing Best Practice</div>
-        Test like a user — use <code>getByText</code>, <code>getByRole</code>, <code>getByLabelText</code> instead of CSS selectors or IDs. This ensures your tests reflect actual user experience, not implementation details.
-      </div>
+  </div>
+  <div class="topic-rail">
+    <div class="topic-rail-inner">
+      <div class="rail-card rail-tip">
+  <div class="rail-label">💡 💡 Testing Best Practice</div>
+  Test like a user — use <code>getByText</code>, <code>getByRole</code>, <code>getByLabelText</code> instead of CSS selectors or IDs. This ensures your tests reflect actual user experience, not implementation details.
+</div>
     </div>
+  </div>
+</div>
+
 
     <!-- ─── 3.11 BUILDING & DEPLOYMENT ─── -->
     <div id="react-deploy" class="topic">
@@ -4655,16 +4834,9 @@ VITE_IMG_BASE=https://image.tmdb.org/t/p/w500</pre>
       <div style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.4)">Print to PDF: Ctrl+P → Save as PDF → Enable Background Graphics</div>
     </div>
 
-    </div><!-- /.content-main -->
 
-    <!-- RIGHT RAIL -->
-    <aside class="content-rail">
-      <div class="rail-sticky" id="railSticky">
-        <!-- Rail cards injected by JS -->
-      </div>
-    </aside>
 
-  </div><!-- /.content-outer -->
+  </div><!-- /.content -->
 
 <!-- FLOATING TOOLBAR -->
 <div class="floating-toolbar">
@@ -4684,22 +4856,27 @@ VITE_IMG_BASE=https://image.tmdb.org/t/p/w500</pre>
    FEATURE 1: DARK / LIGHT MODE
 ═══════════════════════════════════════════════ */
 function toggleDark() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const newTheme = isDark ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('fth-theme', newTheme);
-  document.getElementById('darkIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
-  document.getElementById('darkTip').textContent  = newTheme === 'dark' ? 'Light mode' : 'Dark mode';
+  var html  = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  var theme  = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('fth-theme', theme);
+  var icon = document.getElementById('darkIcon');
+  var tip  = document.getElementById('darkTip');
+  if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  if (tip)  tip.textContent  = theme === 'dark' ? 'Light mode' : 'Dark mode';
 }
 
-// Apply saved theme on load
-(function initTheme() {
-  const saved = localStorage.getItem('fth-theme') || 'light';
-  if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('darkIcon').textContent = '☀️';
-    document.getElementById('darkTip').textContent  = 'Light mode';
-  }
+// Restore saved theme immediately
+(function() {
+  var saved = localStorage.getItem('fth-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', function() {
+    var icon = document.getElementById('darkIcon');
+    var tip  = document.getElementById('darkTip');
+    if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+    if (tip)  tip.textContent  = saved === 'dark' ? 'Light mode' : 'Dark mode';
+  });
 })();
 
 /* ═══════════════════════════════════════════════
@@ -4914,99 +5091,8 @@ document.addEventListener('keydown', function(e) {
    right rail, replacing them in-place with a
    placeholder so scroll anchors still work.
 ═══════════════════════════════════════════════ */
-(function buildRail() {
-  const rail = document.getElementById('railSticky');
-  if (!rail) return;
+// Rail cards rendered inline per topic
 
-  // Only activate on wide enough screens
-  if (window.innerWidth <= 1200) return;
-
-  const typeMap = {
-    info: { cls: 'rail-info', icon: '📖', label: 'Definition'    },
-    tip:  { cls: 'rail-tip',  icon: '💡', label: 'Pro Tip'       },
-    warn: { cls: 'rail-warn', icon: '⚠️', label: 'Common Mistake' },
-  };
-
-  // Collect all eligible callouts (info, tip, warn) — NOT exam, NOT purple
-  const callouts = document.querySelectorAll(
-    '.callout.info, .callout.tip, .callout.warn'
-  );
-
-  callouts.forEach((box, i) => {
-    // Determine type
-    let type = 'info';
-    if (box.classList.contains('tip'))  type = 'tip';
-    if (box.classList.contains('warn')) type = 'warn';
-
-    const meta = typeMap[type];
-
-    // Give the original box an id if it doesn't have one
-    const anchorId = 'rail-anchor-' + i;
-    box.id = anchorId;
-
-    // Get the title from callout-title div
-    const titleEl = box.querySelector('.callout-title');
-    const titleText = titleEl ? titleEl.textContent.trim() : meta.label;
-
-    // Get the inner HTML (minus the title element)
-    let bodyHTML = box.innerHTML;
-    if (titleEl) {
-      bodyHTML = bodyHTML.replace(titleEl.outerHTML, '').trim();
-    }
-
-    // Build the rail card
-    const card = document.createElement('div');
-    card.className = 'rail-card ' + meta.cls;
-    card.dataset.anchor = anchorId;
-    card.innerHTML = \`<div class="rail-label">\${meta.icon} \${titleText}</div>\${bodyHTML}\`;
-
-    // Click on rail card → scroll to anchor
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', () => {
-      const target = document.getElementById(anchorId);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-
-    rail.appendChild(card);
-
-    // Hide the original callout (keep it in DOM for anchor)
-    box.style.display = 'none';
-  });
-
-  // If rail is empty, hide the rail column
-  if (rail.children.length === 0) {
-    const railEl = document.querySelector('.content-rail');
-    if (railEl) railEl.style.display = 'none';
-  }
-
-  // ── Scroll-based highlight: highlight the rail card whose anchor is closest ──
-  const allCards = rail.querySelectorAll('.rail-card');
-
-  function highlightNearest() {
-    if (allCards.length === 0) return;
-    let best = null, bestDist = Infinity;
-
-    allCards.forEach(card => {
-      const anchor = document.getElementById(card.dataset.anchor);
-      if (!anchor) return;
-      // Find the nearest visible section heading above this anchor
-      const topic = anchor.closest('.topic');
-      const target = topic || anchor;
-      const rect = target.getBoundingClientRect();
-      const dist = Math.abs(rect.top - 120);
-      if (dist < bestDist) { bestDist = dist; best = card; }
-    });
-
-    allCards.forEach(c => c.style.outline = '');
-    if (best && bestDist < 400) {
-      best.style.outline = '2px solid currentColor';
-      best.style.outlineOffset = '2px';
-    }
-  }
-
-  window.addEventListener('scroll', highlightNearest, { passive: true });
-  highlightNearest();
-})();
 
 /* ═══════════════════════════════════════════════
    INIT ALL FEATURES
